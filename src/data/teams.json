@@ -1,0 +1,20 @@
+[
+  {
+    "id": "TEAM-8782",
+    "name": "Leon Heinks",
+    "status": "active",
+    "label": "Volunteer"
+  },
+  {
+    "id": "TEAM-878#",
+    "name": "Alexandre Lamberty",
+    "status": "active",
+    "label": "Staff"
+  },
+  {
+    "id": "TEAM-878#",
+    "name": "Silvain Diest",
+    "status": "inactive",
+    "label": "Staff"
+  }
+]
