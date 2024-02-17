@@ -11,9 +11,7 @@ import { customerColumns } from "@/views/customer/components/data-table-columns"
 
 export function Customers() {
   const dispatch = useDispatch<AppDispatch>();
-  const customers = useSelector(
-    (state: RootState) => state.customers.customers,
-  );
+  const customers = useSelector((state: RootState) => state.customers.customers);
 
   useEffect(() => {
     dispatch(fetchAllCustomer());

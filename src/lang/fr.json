@@ -1,0 +1,12 @@
+{
+  "app.name": "Macellum",
+  "menu.dashboard": "Tableau de bord",
+  "menu.calendars": "Calendrier",
+  "menu.customers": "Clients",
+  "menu.products": "Produits",
+  "menu.orders": "Commandes",
+  "menu.providers": "Fournisseurs",
+  "menu.carts": "Panier",
+  "menu.team": "Equipe",
+  "menu.settings": "Settings"
+}

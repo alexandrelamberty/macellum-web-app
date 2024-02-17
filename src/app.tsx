@@ -1,4 +1,3 @@
-
 import { Outlet, Route, Routes } from "react-router-dom";
 
 import { MainNav } from "@/components/main-nav";
@@ -23,43 +22,56 @@ import { SettingsProfilePage } from "@/views/settings/views/profile";
 import { Team } from "@/views/team";
 import { Terms } from "@/views/terms";
 
-const mainNavigation = [
-  {
-    title: "Dashboard",
-    href: "/",
-  },
-  {
-    title: "Calendars",
-    href: "/calendars",
-  },
-  {
-    title: "Customers",
-    href: "/customers",
-  },
-  {
-    title: "Products",
-    href: "/products",
-  },
-  {
-    title: "Orders",
-    href: "/orders",
-  },
-  {
-    title: "Providers",
-    href: "/providers",
-  },
-  {
-    title: "Carts",
-    href: "/carts",
-  },
-  {
-    title: "Team",
-    href: "/team",
-  },
-];
+import LanguageSwitcher from "./components/language-switcher";
+import { MainNavItem } from "./types";
+
+let mainNavigation: MainNavItem[];
 
 function App() {
   const { toast } = useToast();
+
+  mainNavigation = [
+    {
+      id: "menu.dashboard",
+      title: "Dashboard",
+      href: "/",
+    },
+    {
+      id: "menu.calendars",
+      title: "Calendars",
+      href: "/calendars",
+    },
+    {
+      id: "menu.customers",
+      title: "Customers",
+      href: "/customers",
+    },
+    {
+      id: "menu.products",
+      title: "Products",
+      href: "/products",
+    },
+    {
+      id: "menu.orders",
+      title: "Orders",
+      href: "/orders",
+    },
+    {
+      id: "menu.providers",
+      title: "Providers",
+      href: "/providers",
+    },
+    {
+      id: "menu.carts",
+      title: "Carts",
+      href: "/carts",
+    },
+    {
+      id: "menu.team",
+      title: "Team",
+      href: "/team",
+    },
+  ];
 
   toast({
     title: "Scheduled: Catch up",
@@ -88,14 +100,8 @@ function App() {
         <Route path="carts" element={<Carts />} />
         <Route path="team" element={<Team />} />
         <Route path="/settings">
-          <Route
-            index
-            element={<Settings children={<SettingsAccountPage />} />}
-          />
-          <Route
-            path="profile"
-            element={<Settings children={<SettingsProfilePage />} />}
-          />
+          <Route index element={<Settings children={<SettingsAccountPage />} />} />
+          <Route path="profile" element={<Settings children={<SettingsProfilePage />} />} />
           <Route path="*" element={<NoMatch />} />
         </Route>
         <Route path="*" element={<NoMatch />} />
@@ -122,6 +128,7 @@ function Layout() {
           {/* <TeamSwitcher /> */}
           <MainNav className="mx-2 w-full" items={mainNavigation} />
           <div className="ml-auto flex items-center space-x-4">
+            <LanguageSwitcher />
             <Button className="text-sm font-medium right-0">
               {/* <EnvelopeOpenIcon className="mr-2 h-4 w-4" /> */}
               Cashier
