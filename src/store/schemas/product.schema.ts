@@ -1,11 +1,8 @@
 import { z } from "zod";
 
-export const productStockSchema = z.object({
-  min: z.string(),
-  max: z.string(),
-  current: z.string(),
-  stock: z.number(),
-  store: z.string(),
+const Weight = z.object({
+  quantity: z.number().positive(),
+  unit: z.enum(["g", "kg", "lb", "ml", "l"]),
 });
 
 export const productSchema = z.object({
@@ -13,14 +10,27 @@ export const productSchema = z.object({
   code: z.string(),
   name: z.string(),
   brand: z.string(),
-  price_ivat: z.number(),
-  price_evat: z.number(),
-  discount_percent: z.number(),
-  status: z.string(),
-  label: z.string(),
-  priority: z.string(),
+  price: z.object({
+    ivat: z.number(),
+    evat: z.number(),
+    currency: z.string(),
+  }),
+  weight: Weight,
   providers: z.array(z.string()),
-  //   stock: productStockSchema,
+  stock: z.object({
+    shelf: z.number(),
+    quantity: z.number(),
+    in_stock: z.boolean(),
+  }),
+  store: z.object({
+    shelf: z.number(),
+    quantity: z.number(),
+    in_store: z.boolean(),
+  }),
+  category: z.string(),
+  //   type: z.enum(["food", "non_food"]),
+  //   priority: z.string(),
+  //   image: z.string(),
 });
 
 export type Product = z.infer<typeof productSchema>;

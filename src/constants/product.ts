@@ -1,35 +1,29 @@
-import {
-  ArrowDownIcon,
-  ArrowRightIcon,
-  ArrowUpIcon,
-  CheckCircledIcon,
-  CrossCircledIcon,
-} from "@radix-ui/react-icons";
+import { ArrowDownIcon, ArrowRightIcon, ArrowUpIcon, CheckCircledIcon, CrossCircledIcon } from "@radix-ui/react-icons";
 
-export const labels = [
+export const categories = [
   {
     value: "creamery",
-    label: "creamery",
+    label: "Crèmerie/Lait",
   },
   {
     value: "grocery_store",
-    label: "grocery store",
+    label: "Epicerie/Biscuits",
   },
   {
     value: "fruits",
-    label: "Fruits",
+    label: "Epicerie/Bocaux - Conserves",
   },
   {
     value: "hygiene",
-    label: "Hygiene",
+    label: "Epicerie/Café - Thé",
   },
   {
     value: "vegetables",
-    label: "Vegetables",
+    label: "Epicerie/Confiserie",
   },
   {
     value: "fruits",
-    label: "Fruits",
+    label: "Epicerie/Céréales",
   },
 ];
 

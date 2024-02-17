@@ -2,6 +2,7 @@
   {
     "id": "TASK-8782",
     "title": "Weekly order",
+    "label": "paid",
     "date": "2021-06-01T00:00:00.000Z",
     "status": "pending",
     "priority": "medium"
@@ -9,6 +10,7 @@
   {
     "id": "TASK-878#",
     "title": "Weekly order",
+    "label": "unpaid",
     "date": "2021-06-01T00:00:00.000Z",
     "status": "done",
     "priority": "medium"
