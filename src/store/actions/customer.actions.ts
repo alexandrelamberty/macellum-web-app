@@ -1,41 +1,45 @@
-import { createAction, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
+import { CreateCustomerRequest, Customer, UpdateCustomerRequest } from "@eevos/macellum-api-client-typescript";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import customer_data from "@/data/customers.json";
-import { Customer } from "@/store/schemas/customer.schema";
+import { StoreThunk } from "@/store";
 
-export const fetchCustomerById = createAsyncThunk(
-  "customers/fetchById",
-  async (userId: number) => {
-    console.log(userId);
-    // const response = await userAPI.fetchById(userId)
-    // return response.data
-    return null;
-  },
+export const fetchAllCustomers = createAsyncThunk<Customer[], void, { extra: StoreThunk }>(
+    "customer/fetchAll",
+    async (_, thunkAPI) => {
+        const response = await thunkAPI.extra.customers.getCustomers();
+        return response.data;
+    },
 );
 
-export const fetchAllCustomer = createAsyncThunk<Customer[]>(
-  "customers/fetch",
-  async function fetch() {
-    return customer_data;
-    // try {
-    // } catch (err) {
-    //   // You can choose to use the message attached to err or write a custom error
-    //   return isRejectedWithValue("Opps there seems to be an error");
-    // }
-  },
+export const fetchCustomerById = createAsyncThunk<Customer, string, { extra: StoreThunk }>(
+    "customer/fetchById",
+    async (id, thunkAPI) => {
+        const response = await thunkAPI.extra.customers.getCustomer(id);
+        return response.data;
+    },
 );
 
-export const customerInsert = createAction(
-  "customers/insert",
-  function insert(customer: Customer) {
-    return {
-      payload: {
-        ...customer,
-        id: nanoid(),
-        createdAt: new Date().toISOString(),
-      },
-    };
-  },
+export const createCustomer = createAsyncThunk<Customer, CreateCustomerRequest, { extra: StoreThunk }>(
+    "customer/create",
+    async (data, thunkAPI) => {
+        const response = await thunkAPI.extra.customers.createCustomer(data);
+        return response.data;
+    },
 );
 
-export const customerDelete = createAction<string>("customers/delete");
+export const updateCustomer = createAsyncThunk<
+    Customer,
+    { id: string; data: UpdateCustomerRequest },
+    { extra: StoreThunk }
+>("customer/update", async ({ id, data }, thunkAPI) => {
+    const response = await thunkAPI.extra.customers.updateCustomer(id, data);
+    return response.data;
+});
+
+export const deleteCustomer = createAsyncThunk<boolean, string, { extra: StoreThunk }>(
+    "customer/delete",
+    async (id, thunkAPI) => {
+        const response = await thunkAPI.extra.customers.deleteCustomer(id);
+        return response.data;
+    },
+);

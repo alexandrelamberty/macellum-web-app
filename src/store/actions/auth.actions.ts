@@ -1,32 +1,21 @@
+import { AuthUser } from "@eevos/macellum-api-client-typescript";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import auth_data from "@/data/auth.json";
+import { StoreThunk } from "@/store";
 import { AuthLogin, AuthRegister } from "@/store/schemas/auth.schema";
 
-export const loginUser = createAsyncThunk(
-  "auth/login",
-  async ({ email, password }: AuthLogin) => {
-    console.log(email, password);
-    // try {
-    //   const response = await authAPI.login(email, password)
-    //   return response.data
-    // } catch (err) {
-    //   return isRejectedWithValue("Opps there seems to be an error");
-    // }
-    return auth_data;
-  },
+export const loginUser = createAsyncThunk<AuthUser, AuthLogin, { extra: StoreThunk }>(
+    "auth/login",
+    async (credentials, thunkAPI) => {
+        const response = await thunkAPI.extra.auth.loginUser(credentials);
+        return response.data;
+    },
 );
 
-export const registerUser = createAsyncThunk(
-  "auth/register",
-  async (register: AuthRegister) => {
-    console.log(register);
-    return auth_data;
-    // try {
-    //   const response = await authAPI.register(register)
-    //   return response.data
-    // } catch (err) {
-    //   return isRejectedWithValue("Opps there seems to be an error");
-    // }
-  },
+export const registerUser = createAsyncThunk<AuthUser, AuthRegister, { extra: StoreThunk }>(
+    "auth/register",
+    async (user, thunkAPI) => {
+        const response = await thunkAPI.extra.auth.registerUser(user);
+        return response.data;
+    },
 );

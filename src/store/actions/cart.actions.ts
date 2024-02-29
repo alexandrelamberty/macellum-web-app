@@ -1,41 +1,44 @@
-import { createAction, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
+import { Cart, CreateCartRequest, UpdateCartRequest } from "@eevos/macellum-api-client-typescript";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import cart_data from "@/data/carts.json";
-import { Cart } from "@/store/schemas/cart.schema";
+import { StoreThunk } from "@/store";
 
-export const fetchCartById = createAsyncThunk(
-  "carts/fetchById",
-  async (userId: number) => {
-    console.log(userId);
-    // const response = await userAPI.fetchById(userId)
-    // return response.data
-    return null;
-  },
+export const fetchAllCarts = createAsyncThunk<Cart[], void, { extra: StoreThunk }>(
+    "cart/fetchAll",
+    async (_, thunkAPI) => {
+        const response = await thunkAPI.extra.carts.getCarts();
+        return response.data;
+    },
 );
 
-export const fetchAllCart = createAsyncThunk<Cart[]>(
-  "carts/fetch",
-  async function fetch() {
-    return cart_data;
-    // try {
-    // } catch (err) {
-    //   // You can choose to use the message attached to err or write a custom error
-    //   return isRejectedWithValue("Opps there seems to be an error");
-    // }
-  },
+export const fetchCartById = createAsyncThunk<Cart, string, { extra: StoreThunk }>(
+    "cart/fetchById",
+    async (id, thunkAPI) => {
+        const response = await thunkAPI.extra.carts.getCart(id);
+        return response.data;
+    },
 );
 
-export const cartInsert = createAction(
-  "carts/insert",
-  function insert(cart: Cart) {
-    return {
-      payload: {
-        ...cart,
-        id: nanoid(),
-        createdAt: new Date().toISOString(),
-      },
-    };
-  },
+export const createCart = createAsyncThunk<Cart, CreateCartRequest, { extra: StoreThunk }>(
+    "cart/create",
+    async (data, thunkAPI) => {
+        const response = await thunkAPI.extra.carts.createCart(data);
+        return response.data;
+    },
 );
 
-export const cartDelete = createAction<string>("carts/delete");
+export const updateCart = createAsyncThunk<Cart, { id: string; data: UpdateCartRequest }, { extra: StoreThunk }>(
+    "cart/update",
+    async ({ id, data }, thunkAPI) => {
+        const response = await thunkAPI.extra.carts.updateCart(id, data);
+        return response.data;
+    },
+);
+
+export const deleteCart = createAsyncThunk<boolean, string, { extra: StoreThunk }>(
+    "cart/delete",
+    async (id, thunkAPI) => {
+        const response = await thunkAPI.extra.carts.deleteCart(id);
+        return response.data;
+    },
+);

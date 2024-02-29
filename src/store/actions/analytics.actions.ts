@@ -1,7 +1,12 @@
+import { Analytics } from "@eevos/macellum-api-client-typescript";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const fetchAnalytics = createAsyncThunk("analytics/fetch", async () => {
-  // const response = await analyticsAPI.fetch()
-  // return response.data
-  return null;
-});
+import { StoreThunk } from "@/store";
+
+export const fetchAnalytics = createAsyncThunk<Analytics[], void, { extra: StoreThunk }>(
+    "analytics/fetchAll",
+    async (_, thunkAPI) => {
+        const response = await thunkAPI.extra.analytics.getAnalytics();
+        return response.data;
+    },
+);

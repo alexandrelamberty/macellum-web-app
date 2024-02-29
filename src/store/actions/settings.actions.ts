@@ -1,46 +1,60 @@
+import { Settings, UpdateUserSettingsRequest } from "@eevos/macellum-api-client-typescript";
 import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 
-import settings_data from "@/data/settings.json";
-import { Messages } from "@/store/reducers/settings.reducer";
-import { UpdateSettings } from "@/store/schemas/settings.schema";
+import { RootState, StoreThunk } from "@/store";
 
-export const fetchSettingsById = createAsyncThunk("settings/fetchById", async (settingsId: number) => {
-  console.log(settingsId);
-  // const response = await settingsAPI.fetchById(settingsId)
-  // return response.data
-  return settings_data;
-});
+export const fetchSettings = createAsyncThunk<Settings, void, { state: RootState; extra: StoreThunk }>(
+    "settings/fetchById",
+    async (_, thunkAPI) => {
+        const userId = thunkAPI.getState().auth.auth?.id;
+        if (!userId) throw new Error("User not authenticated. Cannot fetch settings.");
 
-export const updateSettings = createAsyncThunk("settings/update", (settings: UpdateSettings) => {
-  return {
-    ...settings,
-    // updatedAt: new Date().toISOString(),
-  };
-});
-
-export const resetSettings = createAsyncThunk("settings/reset", () => {
-  // Initial state
-  const settings = {
-    theme: "dark",
-    lang: "en-US",
-    status: "idle",
-    errors: null,
-  };
-
-  return {
-    payload: {
-      ...settings,
-      createdAt: new Date().toISOString(),
+        try {
+            const response = await thunkAPI.extra.settings.getUserSettings(userId);
+            return response.data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error);
+        }
     },
-  };
+);
+
+export const updateSettings = createAsyncThunk<
+    Settings,
+    { id: string; data: UpdateUserSettingsRequest },
+    { extra: StoreThunk }
+>("settings/update", async ({ id, data }, thunkAPI) => {
+    const response = await thunkAPI.extra.settings.updateUserSettings(id, data);
+    return response.data;
 });
 
-export const updateLocales = createAction("settings/update-locales", (locales: Messages) => {
-  return {
-    payload: {
-      ...locales,
-    },
-  };
+export const changeLanguage = createAction("i18n/change", function change(language: string) {
+    return {
+        payload: {
+            language: language,
+        },
+    };
 });
 
-export const teamDelete = createAction<string>("teams/delete");
+export const updateMessages = createAction("i18n/messages", function change(messages: any) {
+    return {
+        payload: {
+            messages: messages,
+        },
+    };
+});
+
+export const changeTheme = createAction("theme/change", function change(theme: string) {
+    return {
+        payload: {
+            theme: theme,
+        },
+    };
+});
+
+export const changeMode = createAction("mode/change", function change(mode: string) {
+    return {
+        payload: {
+            mode: mode,
+        },
+    };
+});

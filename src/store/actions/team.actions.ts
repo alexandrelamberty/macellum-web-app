@@ -1,43 +1,44 @@
-import { createAction, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
+import { CreateTeamRequest, Team, UpdateTeamRequest } from "@eevos/macellum-api-client-typescript";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import team_data from "@/data/teams.json";
-import { TeamMember } from "@/store/schemas/team.schema";
+import { StoreThunk } from "@/store";
 
-export const teamFetchById = createAsyncThunk(
-  "users/fetchById",
-  async (userId: number) => {
-    console.log(userId);
-    // const response = await teamAPI.fetchById(userId)
-    // return response.data
-    return null;
-  },
+export const fetchAllTeams = createAsyncThunk<Team[], void, { extra: StoreThunk }>(
+    "team/fetchAll",
+    async (_, thunkAPI) => {
+        const response = await thunkAPI.extra.teams.getTeams();
+        return response.data;
+    },
 );
 
-export const fetchAllTeam = createAsyncThunk<TeamMember[]>(
-  "teams/fetch",
-  async function fetch() {
-    return team_data;
-    // try {
-    // const response = await teamAPI.fetchAll(userId)
-    // return response.data
-    // } catch (err) {
-    //   // You can choose to use the message attached to err or write a custom error
-    //   return isRejectedWithValue("Opps there seems to be an error");
-    // }
-  },
+export const fetchTeamById = createAsyncThunk<Team, string, { extra: StoreThunk }>(
+    "team/fetchById",
+    async (id, thunkAPI) => {
+        const response = await thunkAPI.extra.teams.getTeam(id);
+        return response.data;
+    },
 );
 
-export const teamInsert = createAction(
-  "teams/insert",
-  function insert(team: TeamMember) {
-    return {
-      payload: {
-        ...team,
-        id: nanoid(),
-        createdAt: new Date().toISOString(),
-      },
-    };
-  },
+export const createTeam = createAsyncThunk<Team, CreateTeamRequest, { extra: StoreThunk }>(
+    "team/create",
+    async (data, thunkAPI) => {
+        const response = await thunkAPI.extra.teams.createTeam(data);
+        return response.data;
+    },
 );
 
-export const teamDelete = createAction<string>("teams/delete");
+export const updateTeam = createAsyncThunk<Team, { id: string; data: UpdateTeamRequest }, { extra: StoreThunk }>(
+    "team/update",
+    async ({ id, data }, thunkAPI) => {
+        const response = await thunkAPI.extra.teams.updateTeam(id, data);
+        return response.data;
+    },
+);
+
+export const deleteTeam = createAsyncThunk<boolean, string, { extra: StoreThunk }>(
+    "team/delete",
+    async (id, thunkAPI) => {
+        const response = await thunkAPI.extra.teams.deleteTeam(id);
+        return response.data;
+    },
+);

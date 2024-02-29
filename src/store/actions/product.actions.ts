@@ -1,32 +1,45 @@
-import { createAction, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
+import { CreateProductRequest, Product, UpdateProductRequest } from "@eevos/macellum-api-client-typescript";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import product_data from "@/data/products.json";
-import { Product } from "@/store/schemas/product.schema";
+import { StoreThunk } from "@/store";
 
-export const fetchProductById = createAsyncThunk("products/fetchById", async (userId: number) => {
-  console.log(userId);
-  // const response = await userAPI.fetchById(userId)
-  // return response.data
-  return null;
-});
-
-export const fetchAllProduct = createAsyncThunk<Product[]>("products/fetch", async () => {
-  return product_data;
-  // try {
-  // } catch (err) {
-  //   // You can choose to use the message attached to err or write a custom error
-  //   return isRejectedWithValue("Opps there seems to be an error");
-  // }
-});
-
-export const productInsert = createAction("products/insert", (product: Product) => {
-  return {
-    payload: {
-      ...product,
-      id: nanoid(),
-      createdAt: new Date().toISOString(),
+export const fetchAllProducts = createAsyncThunk<Product[], void, { extra: StoreThunk }>(
+    "product/fetchAll",
+    async (_, thunkAPI) => {
+        const response = await thunkAPI.extra.products.getProducts();
+        return response.data;
     },
-  };
+);
+
+export const fetchProductById = createAsyncThunk<Product, string, { extra: StoreThunk }>(
+    "product/fetchById",
+    async (id, thunkAPI) => {
+        const response = await thunkAPI.extra.products.getProduct(id);
+        return response.data;
+    },
+);
+
+export const createProduct = createAsyncThunk<Product, CreateProductRequest, { extra: StoreThunk }>(
+    "product/create",
+    async (data, thunkAPI) => {
+        const response = await thunkAPI.extra.products.createProduct(data);
+        return response.data;
+    },
+);
+
+export const updateProduct = createAsyncThunk<
+    Product,
+    { id: string; data: UpdateProductRequest },
+    { extra: StoreThunk }
+>("product/update", async ({ id, data }, thunkAPI) => {
+    const response = await thunkAPI.extra.products.updateProduct(id, data);
+    return response.data;
 });
 
-export const productDelete = createAction<string>("products/delete");
+export const deleteProduct = createAsyncThunk<boolean, string, { extra: StoreThunk }>(
+    "product/delete",
+    async (id, thunkAPI) => {
+        const response = await thunkAPI.extra.products.deleteProduct(id);
+        return response.data;
+    },
+);

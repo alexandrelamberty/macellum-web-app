@@ -1,12 +1,16 @@
 {
-  "app.name": "Macellum",
-  "menu.dashboard": "Tableau de bord",
-  "menu.calendars": "Calendrier",
-  "menu.customers": "Clients",
-  "menu.products": "Produits",
-  "menu.orders": "Commandes",
-  "menu.providers": "Fournisseurs",
-  "menu.carts": "Panier",
-  "menu.team": "Equipe",
-  "menu.settings": "Settings"
+    "app.user-nav.logout": "Log out",
+    "app.user-nav.welcome-prompt": "Welcome, {name}",
+    "menu.calendars": "Calendriers",
+    "menu.carts": "Panniers",
+    "menu.cashier": "Caisse",
+    "menu.customers": "Clients",
+    "menu.dashboard": "Dashboard",
+    "menu.orders": "Commandes",
+    "menu.products": "Produits",
+    "menu.providers": "Fournisseurs",
+    "menu.team": "Team",
+    "message.view": "Vue",
+    "prompt.date": "Choisisse une date",
+    "search.placeholder": "Recherche"
 }
