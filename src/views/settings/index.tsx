@@ -25,12 +25,6 @@ const settingsNavigation = [
         href: "/examples/forms/notifications",
         items: null,
     },
-    {
-        id: "menu.settings.display",
-        title: "Display",
-        href: "/examples/forms/display",
-        items: null,
-    },
 ];
 
 interface SettingsLayoutProps {
