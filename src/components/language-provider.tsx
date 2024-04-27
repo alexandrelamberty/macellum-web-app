@@ -3,10 +3,11 @@ import { useEffect } from "react";
 import { IntlProvider } from "react-intl";
 
 import { useAppDispatch, useAppSelector } from "@/hooks/store";
-import { RootState } from "@/store";
-import { updateMessages } from "../store/actions/settings.actions";
 import English from "@/lang/en.json";
 import French from "@/lang/fr.json";
+import { RootState } from "@/store";
+
+import { updateMessages } from "../store/actions/settings.actions";
 // const browserLocale = navigator.language;
 
 const LanguageProvider = ({ children }: { children: React.JSX.Element }) => {

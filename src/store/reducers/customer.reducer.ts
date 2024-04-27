@@ -61,7 +61,7 @@ const customerReducer = createReducer(initialState, (builder) => {
         .addCase(deleteCustomer.rejected, (state) => {
             state.status = "failed";
         })
-        .addCase(deleteCustomer.fulfilled, (state, action) => {
+        .addCase(deleteCustomer.fulfilled, () => {
             // TODO: remove customer from state
         });
 });

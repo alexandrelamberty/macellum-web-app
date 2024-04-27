@@ -61,7 +61,7 @@ const orderReducer = createReducer(initialState, (builder) => {
         .addCase(deleteOrder.rejected, (state) => {
             state.status = "failed";
         })
-        .addCase(deleteOrder.fulfilled, (state, action) => {
+        .addCase(deleteOrder.fulfilled, () => {
             // TODO: remove order from state
         });
 });

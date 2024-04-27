@@ -2,9 +2,9 @@ import { z } from "zod";
 
 export const calendarEventSchema = z.object({
     id: z.string(),
-    calendar: z.string(),
-    title: z.string(),
-    label: z.string(),
+    calendar: z.object({}),
+    name: z.string(),
+    //label: z.string(),
     date: z.string(),
 });
 

@@ -61,7 +61,7 @@ const cartReducer = createReducer(initialState, (builder) => {
         .addCase(deleteCart.rejected, (state) => {
             state.status = "failed";
         })
-        .addCase(deleteCart.fulfilled, (state, action) => {
+        .addCase(deleteCart.fulfilled, () => {
             // TODO: remove cart from state
         });
 });

@@ -3,17 +3,17 @@ import { Row } from "@tanstack/react-table";
 
 import { Button } from "@/components/ui/button";
 import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuRadioGroup,
-    DropdownMenuRadioItem,
-    DropdownMenuSeparator,
-    DropdownMenuShortcut,
-    DropdownMenuSub,
-    DropdownMenuSubContent,
-    DropdownMenuSubTrigger,
-    DropdownMenuTrigger,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { labels } from "@/constants/provider";
 import { providerSchema } from "@/store/schemas/provider.schema";
@@ -41,7 +41,7 @@ export function DataTableRowActions<TData>({ row }: DataTableRowActionsProps<TDa
                 <DropdownMenuSub>
                     <DropdownMenuSubTrigger>Labels</DropdownMenuSubTrigger>
                     <DropdownMenuSubContent>
-                        <DropdownMenuRadioGroup value={provider.label}>
+                        <DropdownMenuRadioGroup value={provider.name}>
                             {labels.map((label) => (
                                 <DropdownMenuRadioItem key={label.value} value={label.value}>
                                     {label.label}

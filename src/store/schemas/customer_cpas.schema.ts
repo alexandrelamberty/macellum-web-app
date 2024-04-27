@@ -1,8 +1,9 @@
 import { z } from "zod";
 
 export const customerSchemaCPAS = z.object({
-    id: z.string(),
+    id: z.number(),
     nationality: z.string(),
+    gender: z.string(),
     national_number: z.string(),
     notes: z.string(),
     // active | inactive | transit

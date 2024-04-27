@@ -1,16 +1,16 @@
+import { Analytics } from "@eevos/macellum-api-client-typescript";
 import { createReducer } from "@reduxjs/toolkit";
 
 import { fetchAnalytics } from "@/store/actions/analytics.actions";
-import { Analytics } from "@/store/schemas/analytics.schema";
 
 export type AnalyticsState = {
-    analytics: Analytics | null;
+    analytics: Analytics[];
     status: "idle" | "pending" | "succeeded" | "failed";
     errors: string | null;
 };
 
 const initialState: AnalyticsState = {
-    analytics: null,
+    analytics: [],
     status: "idle",
     errors: null,
 };

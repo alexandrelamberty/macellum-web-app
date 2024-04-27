@@ -40,6 +40,10 @@ const productFormSchema = z.object({
     productType: z.string({
         required_error: "Please select a product type.",
     }),
+    weight: z.object({
+      value: z.number(),
+      unit: z.string()
+    })
 });
 
 type ProductFormValues = z.infer<typeof productFormSchema>;
@@ -194,7 +198,7 @@ export function ProductForm() {
                 <div className="grid grid-cols-4 gap-4">
                     <FormField
                         control={form.control}
-                        name="weight_quantity"
+                        name="weight.value"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Packaging Weight</FormLabel>
@@ -207,7 +211,7 @@ export function ProductForm() {
                     />
                     <FormField
                         control={form.control}
-                        name="weight_unit"
+                        name="weight.unit"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Unit</FormLabel>

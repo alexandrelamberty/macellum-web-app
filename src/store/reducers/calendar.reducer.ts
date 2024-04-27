@@ -61,7 +61,7 @@ const calendarReducer = createReducer(initialState, (builder) => {
         .addCase(deleteCalendar.rejected, (state) => {
             state.status = "failed";
         })
-        .addCase(deleteCalendar.fulfilled, (state, action) => {
+        .addCase(deleteCalendar.fulfilled, () => {
             // TODO: remove calendar from state
         });
 });

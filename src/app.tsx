@@ -6,7 +6,7 @@ import { Outlet, Route, Routes } from "react-router-dom";
 import { MainNav } from "@/components/main-nav";
 import { Search } from "@/components/search";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/components/ui/use-toast";
+import { Toaster } from "@/components/ui/toaster";
 import { UserNavDropdownMenu } from "@/components/user-nav-dropdown-menu";
 import { Register } from "@/views/auth/register";
 import { SignIn } from "@/views/auth/sign-in";
@@ -26,26 +26,24 @@ import { Team } from "@/views/team";
 import { Terms } from "@/views/terms";
 
 import LanguageSwitcher from "./components/language-switcher";
-import { useAppDispatch, useAppSelector } from "./hooks/store";
-import { RootState } from "./store";
+import { useAppDispatch } from "./hooks/store";
+import { fetchSettings } from "./store/actions/settings.actions";
 import { MainNavItem } from "./types";
 import Loading from "./views/loading";
-import { fetchSettings } from "./store/actions/settings.actions";
+import { OrderNew } from "./views/order/order_new";
 
 let mainNavigation: MainNavItem[];
 let userNavigation: MainNavItem[];
 
 function App() {
     const intl = useIntl();
-    // const { toast } = useToast();
-    const dispatch = useAppDispatch();
-    // const {settings, loading, error } = useAppSelector((state: RootState) => state.settings);
 
+    const dispatch = useAppDispatch();
+    // const {lang, status, errors } = useAppSelector((state: RootState) => state.settings);
 
     // FetchSettings
     dispatch(fetchSettings);
     const [isLoading, setIsLoading] = useState(true);
-
     useEffect(() => {
         // Simulate an API call
         setTimeout(() => {
@@ -117,15 +115,15 @@ function App() {
             }),
             href: "/carts",
         },
-        {
-            id: "menu.team",
-            title: intl.formatMessage({
-                id: "menu.team",
-                defaultMessage: "Team",
-                description: "team menu item",
-            }),
-            href: "/team",
-        },
+        // {
+        //     id: "menu.team",
+        //     title: intl.formatMessage({
+        //         id: "menu.team",
+        //         defaultMessage: "Team",
+        //         description: "team menu item",
+        //     }),
+        //     href: "/team",
+        // },
     ];
 
     userNavigation = [
@@ -155,11 +153,6 @@ function App() {
         return <Loading />;
     }
 
-    // toast({
-    //     title: "Scheduled: Catch up",
-    //     description: "Friday, February 10, 2023 at 5:57 PM",
-    // });
-
     return (
         <Routes>
             <Route path="/auth" element={<NoLayout />}>
@@ -179,6 +172,8 @@ function App() {
                 <Route path="products" element={<Products />} />
                 <Route path="providers" element={<Providers />} />
                 <Route path="orders" element={<Orders />} />
+                <Route path="orders/new" element={<OrderNew />} />
+                <Route path="orders/edit" element={<Orders />} />
                 <Route path="carts" element={<Carts />} />
                 <Route path="team" element={<Team />} />
                 <Route path="/settings">
@@ -225,6 +220,7 @@ function Layout() {
                 </div>
             </div>
             <Outlet />
+            <Toaster />
         </div>
     );
 }

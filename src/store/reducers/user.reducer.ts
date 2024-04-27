@@ -59,7 +59,7 @@ const userReducer = createReducer(initialState, (builder) => {
         .addCase(deleteUser.rejected, (state) => {
             state.status = "failed";
         })
-        .addCase(deleteUser.fulfilled, (state, action) => {
+        .addCase(deleteUser.fulfilled, () => {
             // TODO: remove user from state
         });
 });

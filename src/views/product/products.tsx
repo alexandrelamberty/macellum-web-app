@@ -21,6 +21,7 @@ export const Products = () => {
         <div className="flex-1 space-y-4 p-8 pt-6">
             <PageHeader title="Products">
                 <Button variant="outline">Restocking</Button>
+                <Button variant="outline">Restocking</Button>
                 <Button variant="outline">Delivery</Button>
                 <Button variant="outline">New product</Button>
             </PageHeader>

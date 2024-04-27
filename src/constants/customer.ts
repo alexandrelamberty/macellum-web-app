@@ -45,3 +45,11 @@ export const priorities = [
         icon: ArrowUpIcon,
     },
 ];
+
+export const genders = [
+    { label: "Male", value: "male" },
+    { label: "Female", value: "female" },
+    { label: "Non-binary", value: "non-binary" },
+];
+
+

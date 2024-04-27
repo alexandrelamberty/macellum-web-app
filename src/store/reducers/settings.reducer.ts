@@ -28,7 +28,7 @@ const initialSettingsState: SettingsState = {
     mode: "light",
     theme: "frost-banana",
     lang: "en-us",
-    messages: null,
+    messages: "",
     status: "idle",
     errors: null,
 };

@@ -59,7 +59,7 @@ const teamReducer = createReducer(initialState, (builder) => {
         .addCase(deleteTeam.rejected, (state) => {
             state.status = "failed";
         })
-        .addCase(deleteTeam.fulfilled, (state, action) => {
+        .addCase(deleteTeam.fulfilled, () => {
             // TODO: remove team from state
         });
 });

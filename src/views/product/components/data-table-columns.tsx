@@ -1,9 +1,8 @@
 import { ColumnDef } from "@tanstack/react-table";
 
 import { DataTableColumnHeader } from "@/components/data-table-column-header";
-import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
-import { categories, priorities, statuses } from "@/constants/product";
+import { priorities, statuses } from "@/constants/product";
 import { Product } from "@/store/schemas/product.schema";
 import { DataTableRowActions } from "@/views/product/components/data-table-row-actions";
 
@@ -40,6 +39,7 @@ export const productColumns: ColumnDef<Product>[] = [
         accessorKey: "category",
         header: ({ column }) => <DataTableColumnHeader column={column} title="Category" />,
         cell: ({ row }) => <div className="w-[120px]">{row.original.category}</div>,
+        // cell: ({ row }) => <div className="w-[120px]">{row.original.category.name}</div>,
         enableSorting: true,
         enableHiding: true,
     },
@@ -47,11 +47,8 @@ export const productColumns: ColumnDef<Product>[] = [
         accessorKey: "name",
         header: ({ column }) => <DataTableColumnHeader column={column} title="Name" />,
         cell: ({ row }) => {
-            const label = categories.find((label) => label.value === row.original.category);
-
             return (
                 <div className="flex space-x-2">
-                    {label && <Badge variant="outline">{label.label}</Badge>}
                     <span className="max-w-[500px] truncate font-medium">{row.getValue("name")}</span>
                 </div>
             );
@@ -70,7 +67,7 @@ export const productColumns: ColumnDef<Product>[] = [
         header: ({ column }) => <DataTableColumnHeader column={column} title="Packaging" />,
         cell: ({ row }) => (
             <div className="w-[80px]">
-                {row.original.weight.quantity} <span>{row.original.weight.unit}</span>
+                {row.original.weight.value} <span>{row.original.weight.unit}</span>
             </div>
         ),
         enableSorting: true,
@@ -137,7 +134,7 @@ export const productColumns: ColumnDef<Product>[] = [
         header: ({ column }) => <DataTableColumnHeader column={column} title="Price" />,
         cell: ({ row }) => (
             <div className="w-[40px]">
-                {row.original.price.ivat} {row.original.price.currency}
+                {row.original.price.include_vat} {row.original.price.currency}
             </div>
         ),
         enableSorting: true,

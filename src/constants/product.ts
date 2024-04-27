@@ -2,30 +2,63 @@ import { ArrowDownIcon, ArrowRightIcon, ArrowUpIcon, CheckCircledIcon, CrossCirc
 
 export const categories = [
     {
-        value: "creamery",
-        label: "Crèmerie/Lait",
-    },
-    {
-        value: "grocery_store",
-        label: "Epicerie/Biscuits",
+        value: "biscuits",
+        label: "Biscuits",
     },
     {
         value: "fruits",
-        label: "Epicerie/Bocaux - Conserves",
+        label: "Bocaux - Conserves",
     },
     {
         value: "hygiene",
-        label: "Epicerie/Café - Thé",
+        label: "Café - Thé",
     },
     {
-        value: "vegetables",
-        label: "Epicerie/Confiserie",
+        value: "confiserie",
+        label: "Confiserie",
     },
     {
-        value: "fruits",
-        label: "Epicerie/Céréales",
+        value: "cereales",
+        label: "Céréales",
+    },
+    {
+        value: "hygiene",
+        label: "Hygiene",
+    },
+    {
+        value: "lait",
+        label: "Lait",
+    },
+    {
+        value: "lessive",
+        label: "Lessive",
+    },
+    {
+        value: "pates",
+        label: "Pates",
+    },
+    {
+        value: "produits_nettoyants",
+        label: "Produits Nettoyants",
+    },
+    {
+        value: "riz",
+        label: "Riz",
+    },
+    {
+        value: "riz",
+        label: "Sauces, Huile et Condiments",
+    },
+    {
+        value: "riz",
+        label: "Sirops et Jus",
     },
 ];
+
+export const productTypes = [
+    { label: "Food", value: "food" },
+    { label: "Non-Food", value: "non_food" },
+] as const;
 
 export const statuses = [
     {
@@ -60,5 +93,28 @@ export const priorities = [
         label: "High",
         value: "high",
         icon: ArrowUpIcon,
+    },
+];
+
+export const units = [
+    {
+        label: "g",
+        value: "g",
+    },
+    {
+        label: "kg",
+        value: "kg",
+    },
+    {
+        label: "L",
+        value: "L",
+    },
+    {
+        label: "ml",
+        value: "ml",
+    },
+    {
+        label: "pcs",
+        value: "pcs",
     },
 ];

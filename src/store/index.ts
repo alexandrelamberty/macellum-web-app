@@ -27,6 +27,7 @@ import providerReducer from "@/store/reducers/provider.reducer";
 import reportReducer from "@/store/reducers/report.reducer";
 import settingsReducer from "@/store/reducers/settings.reducer";
 import teamReducer from "@/store/reducers/team.reducer";
+import userReducer from "@/store/reducers/user.reducer";
 
 const rootReducer = combineReducers({
     analytics: analyticsReducer,
@@ -42,7 +43,7 @@ const rootReducer = combineReducers({
     reports: reportReducer,
     settings: settingsReducer,
     teams: teamReducer,
-    users: teamReducer,
+    users: userReducer,
 });
 
 export type StoreThunk = {
@@ -60,7 +61,7 @@ export type StoreThunk = {
     users: UserApi;
 };
 
-const API_URL = import.meta.env.VITE_API_URL || "sdfsdfsdf";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3333";
 
 export const store = configureStore({
     reducer: rootReducer,
@@ -68,45 +69,19 @@ export const store = configureStore({
         getDefaultMiddleware({
             thunk: {
                 extraArgument: <StoreThunk>{
-                    analytics: new AnalyticsApi({
-                        basePath: API_URL,
-                    }),
-                    auth: new AuthApi({
-                        basePath: API_URL,
-                    }),
-                    calendars: new CalendarApi({
-                        basePath: API_URL,
-                    }),
-                    carts: new CartApi({
-                        basePath: API_URL,
-                    }),
-                    customers: new CustomerApi({
-                        basePath: API_URL,
-                    }),
-                    orders: new OrderApi({
-                        basePath: API_URL,
-                    }),
-                    overviews: new AnalyticsApi({
-                        basePath: API_URL,
-                    }),
-                    products: new ProductApi({
-                        basePath: API_URL,
-                    }),
-                    providers: new ProviderApi({
-                        basePath: API_URL,
-                    }),
-                    reports: new ReportApi({
-                        basePath: API_URL,
-                    }),
-                    settings: new UserApi({
-                        basePath: API_URL,
-                    }),
-                    teams: new TeamApi({
-                        basePath: API_URL,
-                    }),
-                    users: new UserApi({
-                        basePath: API_URL,
-                    }),
+                    analytics: new AnalyticsApi(undefined, API_URL),
+                    auth: new AuthApi(undefined, API_URL),
+                    calendars: new CalendarApi(undefined, API_URL),
+                    carts: new CartApi(undefined, API_URL),
+                    customers: new CustomerApi(undefined, API_URL),
+                    orders: new OrderApi(undefined, API_URL),
+                    overviews: new AnalyticsApi(undefined, API_URL),
+                    products: new ProductApi(undefined, API_URL),
+                    providers: new ProviderApi(undefined, API_URL),
+                    reports: new ReportApi(undefined, API_URL),
+                    settings: new UserApi(undefined, API_URL),
+                    teams: new TeamApi(undefined, API_URL),
+                    users: new UserApi(undefined, API_URL),
                 },
             },
             serializableCheck: false,

@@ -33,6 +33,7 @@ export const Carts = () => {
         <div className="flex-1 space-y-4 p-8 pt-6">
             <PageHeader title="Carts">
                 <CalendarDateRangePicker />
+                <Button variant="outline">Today</Button>
                 {/* Active carts all dates */}
                 {/* Close carts date filtered */}
 

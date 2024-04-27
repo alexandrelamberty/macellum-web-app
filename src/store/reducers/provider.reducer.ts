@@ -61,7 +61,7 @@ const providerReducer = createReducer(initialState, (builder) => {
         .addCase(deleteProvider.rejected, (state) => {
             state.status = "failed";
         })
-        .addCase(deleteProvider.fulfilled, (state, action) => {
+        .addCase(deleteProvider.fulfilled, () => {
             // TODO: remove provider from state
         });
 });

@@ -42,7 +42,7 @@ export const providerColumns: ColumnDef<Provider>[] = [
         accessorKey: "name",
         header: ({ column }) => <DataTableColumnHeader column={column} title="Name" />,
         cell: ({ row }) => {
-            const label = labels.find((label) => label.value === row.original.label);
+            const label = labels.find((label) => label.value === row.original.name);
 
             return (
                 <div className="flex space-x-2">

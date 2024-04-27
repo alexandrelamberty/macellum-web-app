@@ -1,4 +1,3 @@
-import { FormattedMessage } from "react-intl";
 import { Link, useLocation } from "react-router-dom";
 
 import { MainNavItem } from "@/types";
