@@ -1,18 +1,18 @@
 import * as React from "react";
 
 import {
-    ColumnDef,
-    ColumnFiltersState,
-    flexRender,
-    getCoreRowModel,
-    getFacetedRowModel,
-    getFacetedUniqueValues,
-    getFilteredRowModel,
-    getPaginationRowModel,
-    getSortedRowModel,
-    SortingState,
-    useReactTable,
-    VisibilityState,
+  ColumnDef,
+  ColumnFiltersState,
+  flexRender,
+  getCoreRowModel,
+  getFacetedRowModel,
+  getFacetedUniqueValues,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  SortingState,
+  useReactTable,
+  VisibilityState,
 } from "@tanstack/react-table";
 
 import { DataTablePagination } from "@/components/data-table-pagination";
@@ -22,6 +22,7 @@ import { DataTableToolbar } from "@/views/product/components/data-table-toolbar"
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];
     data: TData[];
+    children?: React.ReactNode;
 }
 
 export function ProductDataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) {
